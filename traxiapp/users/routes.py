@@ -1,4 +1,5 @@
 from flask import Blueprint, url_for, redirect, render_template, current_app
+from flask_login import current_user, login_user, logout_user
 from traxiapp.users.forms import LoginForm, RegisterForm
 from traxiapp import db
 from traxiapp.models import User
@@ -8,18 +9,25 @@ from werkzeug.security import generate_password_hash, check_password_hash
 users = Blueprint('users', __name__)
 
 # url route for the login page
-
 @users.route('/login', methods=['GET', 'POST'])
 def login():
-    # instantiate the login form
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user:
-            if check_password_hash(user.password, form.password.data):
-                return redirect(url_for('main.home'))       
-        return '<h1> Invalid password or username </h1>'
+        if user is None or not check_password_hash(user.password, form.password.data):
+            flash('Invald username or passowrd')
+            return redirect(url_for('user.login')) 
+        login_user(user, remember=form.remember_me.data)
+        return redirect(url_for('main.home'))      
     return render_template('login.html', title='Sign in', form=form)
+
+# url route for the logout page
+@users.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('main.home'))
 
 
 # url route for the registration page
