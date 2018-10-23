@@ -3,15 +3,12 @@
 flask app tutorial:
 https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world 
 
-set FLASK_APP enviroment variable
-(venv) $ export FLASK_APP=run.py
-
-create database based on the model classes
+# create database based on the model classes
 (venv) $ flask shell
->>> from traxiapp import db
->>> db.create_all()
+ from traxiapp import db
+ db.create_all()
 
-add support for database migrations
+# add support for database migrations
 (venv) $ flask db init
 
 To make changes to the database schema the following procedure needs to be followed:
@@ -22,7 +19,10 @@ To make changes to the database schema the following procedure needs to be follo
 5. Apply the migration to the database with the 'flask db upgrade' command
 
 
-Run application, cd into app folder
+# Run application
+cd into app folder
+set FLASK_APP enviroment variable
+(venv) $ export FLASK_APP=run.py
 (venv) $ python run.py
 
 
