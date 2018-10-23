@@ -29,3 +29,7 @@ set FLASK_APP enviroment variable
 # styling
 create a responsive navbar:
 https://www.youtube.com/watch?v=L0uNai3XyKQ 
+
+# git commands
+set remote: git remote add origin https://github.com/USERNAME/REPOSITORY.git
+clone single branch: git clone --single-branch -b branch host:/dir.git
