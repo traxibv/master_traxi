@@ -30,6 +30,8 @@ set FLASK_APP enviroment variable
 create a responsive navbar:
 https://www.youtube.com/watch?v=L0uNai3XyKQ 
 
-# git commands
-set remote: git remote add origin https://github.com/USERNAME/REPOSITORY.git
-clone single branch: git clone --single-branch -b branch host:/dir.git
+# creat new branch and work locally
+- create new branch on github
+- greate local git repository: git init
+- add remote and track newly created branch: git remote add -t <branch_name> <remote_name> <remote_url>
+- pull files from remote into local folder: git pull
