@@ -5,8 +5,9 @@ https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 
 # create database based on the model classes
 (venv) $ flask shell
- from traxiapp import db
- db.create_all()
+
+from traxiapp import db
+db.create_all()
 
 # add support for database migrations
 (venv) $ flask db init
