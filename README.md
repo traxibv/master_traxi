@@ -7,6 +7,7 @@ https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 (venv) $ flask shell
 
 from traxiapp import db
+
 db.create_all()
 
 # add support for database migrations
