@@ -22,8 +22,10 @@ def create_app(config_class=DevelopmentConfig):
 
     from traxiapp.users.routes import users
     from traxiapp.main.routes import main
+    from traxiapp.drivers.routes import drivers
     app.register_blueprint(users)
     app.register_blueprint(main)
+    app.register_blueprint(drivers)
 
     return app
 

@@ -1,6 +1,8 @@
-
 {% extends "base.html" %}
 
-{% block content %}<img src="/static/images/home-safari.jpg" style='width:100%;' border="0" alt="Null">{% endblock content %}
-
-
+{% block content %}
+<div class="container-fluid">
+    <strong>Go Live date: {{ go_live }}</strong><br>
+    <strong>Days until Go Live: {{ untill_golive.days }}</strong>
+</div>
+{% endblock content %}

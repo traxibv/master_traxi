@@ -1,6 +1,6 @@
-from flask import Blueprint, url_for, redirect, render_template, current_app
-from flask_login import current_user, login_user, logout_user
-from traxiapp.users.forms import LoginForm, RegisterForm
+from flask import Blueprint, url_for, redirect, render_template, current_app, request
+from flask_login import current_user, login_user, logout_user, login_required
+from traxiapp.users.forms import LoginForm, RegisterUserForm
 from traxiapp import db
 from traxiapp.models import User
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -18,9 +18,12 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not check_password_hash(user.password, form.password.data):
             flash('Invald username or passowrd')
-            return redirect(url_for('user.login')) 
+            return redirect(url_for('users.login')) 
         login_user(user, remember=form.remember_me.data)
-        return redirect(url_for('main.home'))      
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netlog != '':
+            next_page=url_for('main.home')
+        return redirect(next_page)      
     return render_template('login.html', title='Sign in', form=form)
 
 # url route for the logout page
@@ -31,14 +34,21 @@ def logout():
 
 
 # url route for the registration page
-@users.route('/register',  methods=['GET', 'POST'])
-def register():
+@users.route('/register_user',  methods=['GET', 'POST'])
+def register_user():
     # instantiate the registration form
-    form = RegisterForm()
+    form = RegisterUserForm()
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data, method='sha256')
         new_user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
         return '<h1> New user has been created </h1>'
-    return render_template('register.html', title='Registration', form=form)
+    return render_template('register_user.html', title='Registration User', form=form)
+
+#url for register page
+@users.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    return render_template('user.html', user=user)
