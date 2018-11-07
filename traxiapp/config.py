@@ -4,7 +4,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
     DEBUG=False
-    SECRET_KEY=os.environ.get('SECRET_KEY') or 'traxi1234%^'
+    SECRET_KEY=os.environ.get('TRAXI_DB_PASS')
     SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 
