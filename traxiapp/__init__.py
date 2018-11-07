@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from traxiapp.config import DevelopmentConfig, RijswijkConfig
+from traxiapp.config import DevConfig
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -11,9 +11,9 @@ bootstrap = Bootstrap()
 login_manager = LoginManager()
 
 
-def create_app(config_class=DevelopmentConfig):
+def create_app(config_class=RijswijkConfig):
     app = Flask(__name__)
-    app.config.from_object(DevelopmentConfig)
+    app.config.from_object(RijswijkConfig)
 
     db.init_app(app)
     migrate.init_app(app, db)

@@ -8,14 +8,8 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 
-# Development Config
-class DevelopmentConfig(Config):
-    DEBUG=True
-    SQLALCHEMY_DATABASE_URI='postgresql://postgres@localhost/traxi'
-
-
-# Rijswijk server
-class RijswijkConfig(Config):
+# Development server
+class DevConfig(Config):
     DEBUG=True
     SQLALCHEMY_DATABASE_URI='postgresql:///traxi'
 
