@@ -11,9 +11,9 @@ bootstrap = Bootstrap()
 login_manager = LoginManager()
 
 
-def create_app(config_class=RijswijkConfig):
+def create_app(config_class=DevConfig):
     app = Flask(__name__)
-    app.config.from_object(RijswijkConfig)
+    app.config.from_object(DevConfig)
 
     db.init_app(app)
     migrate.init_app(app, db)
