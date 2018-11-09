@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container-fluid">
-
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="col-md-6">
-            <legend>Sign Up</legend>
+            <legend>Sign In</legend>
             <div class="form-group">
                 {{ form.username(class="from-control form-control-lg", placeholder="Username", tabindex="3") }}
             </div>
@@ -13,9 +12,21 @@
                 {{ form.password(class="from-control form-control-lg", placeholder="Password", tabindex="3") }}
             </div>
         </fieldset>
-        <div class="form-group">
+        <div class="form-group" style="display: inline">
             {{ form.submit(class="btn btn-outline-info") }}
         </div>
+
+        <!--Invalid username or password-->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <small class="alert alert-{{ category }}" style="display: inline">
+                        {{ message }}
+                    </small>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
     </form>
 
     <small class="text-muted">
