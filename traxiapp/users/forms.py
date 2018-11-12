@@ -11,12 +11,8 @@ class LoginForm(FlaskForm):
 
 
 class RegisterForm(FlaskForm):
-    username = StringField(
-        'Username', validators=[DataRequired(), Length(min=4, max=15)])
-    password = PasswordField(
-        'Password', validators=[DataRequired(), Length(min=8, max=80)])
-    confirm_password = PasswordField('Confirm Password', validators=[
-                                     DataRequired(), EqualTo('password')])
-    email = StringField('Email', validators=[DataRequired(), Email(
-        message='Invalid email'), Length(max=50)])
+    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=15)])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=6, max=80)])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    email = StringField('Email', validators=[DataRequired(), Email(message='Invalid email'), Length(max=50)])
     submit = SubmitField('Sign Up')
