@@ -1,4 +1,5 @@
 import os
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -10,5 +11,8 @@ class Config(object):
 
 # Development server
 class DevelopmentConfig(Config):
-    DEBUG=True
+    DEBUG = True
     SQLALCHEMY_DATABASE_URI='postgresql:///traxi'
+    SECURITY_PASSWORD_HASH = 'sha512_crypt'
+    SECURITY_PASSWORD_SALT = 'fhasdgihwntlgy8f'
+
