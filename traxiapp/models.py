@@ -1,34 +1,34 @@
 from traxiapp import db
-from traxiapp import login_manager
 from flask import current_app
-from flask_login import UserMixin
-from hashlib import md5
+from flask_security import UserMixin, RoleMixin
 
 
-class User(UserMixin, db.Model):
+roles_users = db.Table(
+    'roles_users',
+    db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
+    db.Column('role_id', db.Integer(), db.ForeignKey('role.id'))
+)
+
+
+class Role(db.Model, RoleMixin):
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(80), unique=True)
+    description = db.Column(db.String(255))
+
+    def __str__(self):
+        return self.name
+
+
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(15), unique=True, nullable=False)
-    email = db.Column(db.String(50), unique=True, nullable=False)
-    password = db.Column(db.String(80))
+    username = db.Column(db.String(255))
+    email = db.Column(db.String(255), unique=True)
+    password = db.Column(db.String(255))
+    active = db.Column(db.Boolean())
+    confirmed_at = db.Column(db.DateTime())
+    roles = db.relationship('Role', secondary=roles_users,
+                            backref=db.backref('users', lazy='dynamic'))
 
-    def avatar(self, size):
-        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
-        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
+    def __str__(self):
+        return self.email
 
-
-@login_manager.user_loader
-def load_user(id):
-    return User.query.get(int(id))
-
-
-class Driver(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(50), nullable=False)
-    last_name = db.Column(db.String(50)nullable=False)
-    location = db.Column(db.String(80)nullable=Flase)
-    user_id = db.Column(bd.Integer, db.ForeignKey('user.id'))
-                                                  ))
-    description=db.Column(db.Text(300))
-    fun_fact=db.Column(db.Text(300))
-    no_bookings=db.Column(db.Numeric(10, 0))
-    rating=db.Column(db.Numeric(10, 2))

@@ -7,7 +7,7 @@ main = Blueprint('main', __name__)
 @main.route('/')
 @main.route('/home')
 def home():
-    go_live = date(2019, 3, 1)
+    go_live = date(2019, 6, 6)
     today = date.today()
     untill_golive = go_live-today
     return render_template('home.html', title="Home", go_live=go_live, untill_golive=untill_golive)

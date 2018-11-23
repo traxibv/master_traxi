@@ -1,18 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm">
-        <b>Register as user</b>
-        <p>to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no one has gone before!</p>
-        <a href="/register_user" class="btn btn-link" role="button">Register now!</a>
 
-      </div>
-      <div class="col-sm">
-        <b>Register as driver</b>
-        <p>There is a way out of every box, a solution to every puzzle; it's just a matter of finding it.</p>
-        <a href="/register_driver" class="btn btn-link" role="button">Register now!</a>
-      </div>
-    </div>
-  </div>
-  {% endblock %}
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="col-md-6">
+            <legend>Register as user</legend>
+            <div class="form-group">
+                {{ form.username(class="from-control form-control-lg", placeholder="Username") }}
+            </div>
+            <div class="form-group">
+                {{ form.email(class="from-control form-control-lg", placeholder="E-Mail") }}
+            </div>
+            <div class="form-group">
+                {{ form.password(class="from-control form-control-lg", placeholder="Password") }}
+            </div>
+            <div class="form-group">
+                {{ form.confirm_password(class="from-control form-control-lg", placeholder="Confirm Password") }}
+            </div>
+            <div class="form-group">
+               {{ form.driver_checkbox() }} {{ form.driver_checkbox.label }}
+            </div>
+
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+
+    <small class="text-muted">
+        Allready Have An Account?<a class="ml-2" href="{{ url_for('users.login') }}">Sign In</a>
+    </small>
+</div>
+{% endblock %}
