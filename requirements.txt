@@ -1,9 +1,7 @@
 Flask
 Flask-Bootstrap
-Flask-Login
-Flask-Migrate
 Flask-SQLAlchemy
-Flask-WTF
+Flask-Migrate
 Flask-Security
 Psycopg2
 Gunicorn
