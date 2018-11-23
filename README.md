@@ -37,3 +37,6 @@ https://www.youtube.com/watch?v=L0uNai3XyKQ
 - greate local git repository: git init
 - add remote and track newly created branch: git remote add -t <branch_name> <remote_name> <remote_url>
 - pull files from remote into local folder: git pull
+
+# rebase branch with master
+https://www.youtube.com/watch?v=f1wnYdLEpgI 
