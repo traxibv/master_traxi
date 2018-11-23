@@ -2,14 +2,12 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from traxiapp.config import DevelopmentConfig, RijswijkConfig
 from flask_security import SQLAlchemyUserDatastore, Security
-
+from traxiapp.config import DevelopmentConfig
 
 db = SQLAlchemy()
 migrate = Migrate()
 bootstrap = Bootstrap()
-
 
 def create_app(config_class=DevelopmentConfig):
     """

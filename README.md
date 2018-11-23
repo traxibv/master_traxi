@@ -5,8 +5,10 @@ https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 
 # create database based on the model classes
 (venv) $ flask shell
- from traxiapp import db
- db.create_all()
+
+from traxiapp import db
+
+db.create_all()
 
 # add support for database migrations
 (venv) $ flask db init
@@ -29,3 +31,9 @@ set FLASK_APP enviroment variable
 # styling
 create a responsive navbar:
 https://www.youtube.com/watch?v=L0uNai3XyKQ 
+
+# creat new branch and work locally
+- create new branch on github
+- greate local git repository: git init
+- add remote and track newly created branch: git remote add -t <branch_name> <remote_name> <remote_url>
+- pull files from remote into local folder: git pull

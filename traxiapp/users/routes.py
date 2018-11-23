@@ -1,3 +1,4 @@
+
 from flask import Blueprint, url_for, redirect, render_template, current_app, request, flash
 from traxiapp.users.forms import LoginForm, RegisterForm
 from traxiapp import db
@@ -22,7 +23,9 @@ def register():
     return render_template('register.html', title='Registration', form=form)
 
 
+
 @users.route('/login_user', methods=['GET', 'POST'])
+
 def login():
     form = LoginForm()
     if current_user.is_authenticated:
