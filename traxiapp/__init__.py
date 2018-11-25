@@ -39,14 +39,15 @@ def create_app(config_class=DevelopmentConfig):
     @app.before_first_request
     def before_first_request():
         # Create any database tables that don't exist yet.
-        db.create_all()
+        with app.app_context():
+            db.create_all()
         # Create the Roles "driver" and "end-user" -- unless they already exist
-        user_datastore.find_or_create_role(name='driver', description='driver')
-        user_datastore.find_or_create_role(name='end-user', description='klant')
+            user_datastore.find_or_create_role(name='driver', description='driver')
+            user_datastore.find_or_create_role(name='end-user', description='klant')
         # Create test driver and end-user
-        if not user_datastore.find_user(username='testdriver'):
-            user_datastore.create_user(username='testdriver', email='test@driver.com', password='test123', roles=['driver'])
+            if not user_datastore.find_user(username='testdriver'):
+                user_datastore.create_user(username='testdriver', email='test@driver.com', password='test123', roles=['driver'])
         # Commit any database changes
-        db.session.commit()
+            db.session.commit()
 
     return app

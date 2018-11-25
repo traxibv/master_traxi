@@ -19,6 +19,7 @@ def register():
         else:
             user_datastore.create_user(username=form.username.data, email=form.email.data, password=hashed_password,roles=['end-user'])
         db.session.commit()
+        flash('Welcome {}, Your account has been created'.format(form.username.data), 'success')
         return redirect(url_for('main.home'))
     return render_template('register.html', title='Registration', form=form)
 
@@ -28,12 +29,12 @@ def register():
 
 def login():
     form = LoginForm()
-    if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
     if form.validate_on_submit():
         user = user_datastore.get_user(form.email.data)
-        login_user(user)
-        redirect(url_for('main.home'))
+        if user is None or not verify_password(form.password.data,user.password):
+            flash('Invalid username or password')
+            return redirect(url_for('users.login'))
+        login_user(user, remember=form.remember_me.data)
         return redirect(url_for('main.home'))
     return render_template('login.html', title='Sign in', form=form)
 
