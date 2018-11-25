@@ -1,8 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container-fluid">
-        <strong>D-Day: {{ go_live }}</strong><br>
-        <strong>Days till D-Day: {{ untill_golive.days }}</strong>
+
+{% block flash_message %}
+<div class="container">
+    {% with messages=get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">
+        <button type="button" class="close" data-dismiss="alert">
+            &times;
+        </button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 </div>
+{% endblock flash_message %}
+
 {% endblock content %}

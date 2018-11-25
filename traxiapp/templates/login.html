@@ -21,14 +21,15 @@
 
         <!--Invalid username or password-->
         {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <small class="alert alert-{{ category }}" style="display: inline">
-                        {{ message }}
-                    </small>
-                {% endfor %}
-            {% endif %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <small class="alert alert-{{ category }}" style="display: inline">
+            {{ message }}
+        </small>
+        {% endfor %}
+        {% endif %}
         {% endwith %}
+
 
     </form>
 
