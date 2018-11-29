@@ -1,7 +1,7 @@
 from flask import Blueprint, url_for, redirect, render_template, current_app, flash, request
 from flask_login import current_user, login_user, logout_user, login_required
 from traxiapp import db, bcrypt
-from traxiapp.users.forms import LoginForm, RegisterForm
+from traxiapp.users.forms import LoginForm, RegisterForm, UpdateAccountForm
 from traxiapp.models import User
 
 
@@ -50,7 +50,17 @@ def logout():
     return redirect(url_for('main.home'))
 
 # url route for the account page
-@users.route('/account')
+@users.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
-    return render_template('account.html', title='Account')
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('your account has been updated', 'success')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    return render_template('account.html', title='Account', form=form)
