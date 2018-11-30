@@ -17,9 +17,14 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        new_user = User(username=form.username.data, email=form.email.data, password=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
+        if form.driver_checkbox.data is True:
+            new_user = User(username=form.username.data, email=form.email.data, password=hashed_password, roles=['driver'])
+            db.session.add(new_user)
+            db.session.commit()
+        else:
+            new_user = User(username=form.username.data, email=form.email.data, password=hashed_password, roles=['user'])
+            db.session.add(new_user)
+            db.session.commit()
         flash(f'{form.username.data} created an account!', 'success')
         return redirect(url_for('users.login'))
     return render_template('register.html', title='Register', form=form)
