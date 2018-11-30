@@ -3,12 +3,12 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config(object):
-    DEBUG=False
+    DEBUG = False
     SECRET_KEY = os.environ.get('TRAXI_KEY')
-    SQLALCHEMY_TRACK_MODIFICATIONS=False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 # Development server
 class DevelopmentConfig(Config):
-    DEBUG=True
-    SQLALCHEMY_DATABASE_URI='postgresql:///traxi'
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'postgresql:///traxi'
