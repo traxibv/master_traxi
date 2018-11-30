@@ -7,7 +7,6 @@ from traxiapp.config import DevelopmentConfig
 
 
 migrate = Migrate()
-bootstrap = Bootstrap()
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
@@ -19,7 +18,6 @@ def create_app(config_class=DevelopmentConfig):
 
     # initialize extensions
     migrate.init_app(app, db)
-    bootstrap.init_app(app)
     db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
