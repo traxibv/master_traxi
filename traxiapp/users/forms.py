@@ -17,6 +17,7 @@ class RegisterForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired(), Length(min=6, max=80)])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')
+    driver_checkbox = BooleanField('Register as driver?')
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()

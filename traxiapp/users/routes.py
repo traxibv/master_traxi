@@ -2,7 +2,7 @@ from flask import Blueprint, url_for, redirect, render_template, current_app, fl
 from flask_login import current_user, login_user, logout_user, login_required
 from traxiapp import db, bcrypt
 from traxiapp.users.forms import LoginForm, RegisterForm, UpdateAccountForm
-from traxiapp.models import User
+from traxiapp.models import User, Role
 
 
 users = Blueprint('users', __name__)
@@ -19,6 +19,13 @@ def register():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         new_user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(new_user)
+        # create entry in the association (userroles) table according to the value of the checkbos
+        if form.driver_checkbox.data is True:
+            driver_role = Role.query.filter_by(name='driver').first()
+            new_user.roles.append(driver_role)
+        else:
+            user_role = Role.query.filter_by(name='end-user').first()
+            new_user.roles.append(user_role)
         db.session.commit()
         flash(f'{form.username.data} created an account!', 'success')
         return redirect(url_for('users.login'))
