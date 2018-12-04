@@ -25,14 +25,25 @@ def create_app(config_class=DevelopmentConfig):
     login_manager.login_view = 'users.login'
     login_manager.login_message_category = 'info'
 
-    # security
-
     # import blueprints
     from traxiapp.users.routes import users
     from traxiapp.main.routes import main
     app.register_blueprint(users)
     app.register_blueprint(main)
 
+    from traxiapp.models import Role
+    @app.before_first_request
+    def before_first_request():
+        with app.app_context():
+            db.create_all()
+            if not Role.query.filter_by(name='driver').first():
+                driver_role = Role(name='driver')
+                db.session.add(driver_role)
+                db.session.commit()
+            if not Role.query.filter_by(name='end-user').first():
+                end_user_role = Role(name='end-user')
+                db.session.add(end_user_role)
+                db.session.commit()
 
     return app
 
