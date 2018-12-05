@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, current_app
-from datetime import datetime
+from traxiapp.models import User, Role
 
 main = Blueprint('main', __name__)
 
@@ -10,7 +10,8 @@ main = Blueprint('main', __name__)
 
 @main.route('/home')
 def home():
-    return render_template('home.html', title="Home")
+    drivers = User.query.join(User.roles).filter(Role.name=='driver').all()
+    return render_template('home.html', title="Home", drivers=drivers)
 
 @main.route('/about')
 def about():
