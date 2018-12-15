@@ -10,3 +10,4 @@
         <td>{{ driver.email }}</td>
     </tr>
 </table>
+<a href="{{ url_for('drivers.user', username=driver.username) }} " class="button is-link">See driver profile</a>
