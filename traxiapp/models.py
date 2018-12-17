@@ -2,6 +2,12 @@ from flask import current_app
 from flask_login import UserMixin
 from traxiapp import db, login_manager
 
+class Review(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    driver_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    rating = db.Column(db.Integer)
+    review_text = db.Column(db.String(300))
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -14,7 +20,12 @@ class User(db.Model, UserMixin):
     city = db.Column(db.String(50))
     about = db.Column(db.String(300))
 
+    # Role relationship
     roles = db.relationship('Role', secondary='userroles',backref=db.backref('users', lazy='dynamic'))
+
+    #Review relationship
+    reviewer = db.relationship('Review', foreign_keys=[Review.user_id],backref=db.backref('reviewer', lazy='joined'))
+    reviewed = db.relationship('Review', foreign_keys=[Review.driver_id], backref=db.backref('reviewed', lazy='joined'))
 
     def has_roles(self):
         return self.roles
@@ -25,6 +36,14 @@ class User(db.Model, UserMixin):
                 return True
             else:
                 continue
+    
+    def create_review(self, driver, rating, review_text):
+        new_review = Review(reviewed=driver, reviewer=self, rating=rating, review_text=review_text)
+        db.session.add(new_review)
+
+    def get_reviews(self):
+        reviews=self.reviewed
+        return reviews
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -37,6 +56,8 @@ class Role(db.Model):
 
 
 userroles = db.Table('userroles',
-db.Column('user_id', db.Integer(),db.ForeignKey('user.id',)),
+db.Column('user_id', db.Integer(),db.ForeignKey('user.id')),
 db.Column('role_id', db.Integer(), db.ForeignKey('role.id'))
 )
+
+

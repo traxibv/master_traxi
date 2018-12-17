@@ -15,9 +15,11 @@
           <p>{{ user.about }}</p>
           </div>
       </section>
+
       <section class="section">
+          <div class="box">
           <h2 class="subtitle">General info:</h2>
-          <table class="table is-striped">
+          <table class="table">
               <tbody>
                   <tr>
                   <th>Username:</th>
@@ -35,6 +37,28 @@
                   </tr>
               </tbody>
           </table>
-
+        </div>
       </section>
+
+      <section class="section">
+          <div class="box">
+            <h2 class="subtitle">Reviews</h2>
+            {% for review in reviews %}
+            <div class="container is-fluid">
+                    <div class="box">
+                        {% include '_review.html' %}
+                    </div>
+            </div>
+            {% endfor %}
+            
+
+
+            {% if current_user.is_authenticated %}  
+            {% if current_user.has_role('end-user') %}
+      <a class="button is-dark" href="{{ url_for('drivers.create_review', username=user.username) }}">Create Review</a>
+      {% endif %}
+      {% endif %}
+    </div>
+</section>
+
 {% endblock %}
