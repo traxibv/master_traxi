@@ -6,16 +6,31 @@
         <h1>Fuhr mich.</h1>
     </div>
 </section>
-{% for driver in drivers %}
-<div class="container is-fluid">
-    <section class="section">
-        <div class="box">
+
+<div class="tile is-ancestor">
+    <div class="tile is-3 is-vertical is-parent">
+        <div class="tile is-child box">
+            <h1 class='tile'>Select driver</h1>
+            <br>
+            <div class="select is-primary is-fullwidth">
+                <select>
+                    <option disabled selected>Select City</option>
+                    {% for city in cities %}
+                    <option>{{ city }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="tile is-vertical is-parent">
+        {% for driver in drivers %}
+        <div class="tile is-child">
             {% include '_driver.html' %}
         </div>
-    </section>
+        {% endfor %}
+    </div>
 </div>
-{% endfor %}
+
 
 {% endblock content %}
-
-

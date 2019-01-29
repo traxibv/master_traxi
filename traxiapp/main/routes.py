@@ -1,17 +1,19 @@
 from flask import Blueprint, render_template, current_app
+from traxiapp import db
 from traxiapp.models import User, Role
+from traxiapp.main.forms import SearchForm
 
 main = Blueprint('main', __name__)
 
 
-@main.route('/')
-#def index():
-#    return render_template('index.html', title="Index")
-
-@main.route('/home')
+@main.route('/', methods=['GET'])
+@main.route('/home', methods=['GET'])
 def home():
     drivers = User.query.join(User.roles).filter(Role.name=='driver').all()
-    return render_template('home.html', title="Home", drivers=drivers)
+    results_cities = db.session.query(User.city).distinct()
+    cities = [city for city, in results_cities]
+    cities.remove(None)
+    return render_template('home.html', title="Home", drivers=drivers, cities=cities)
 
 @main.route('/about')
 def about():
