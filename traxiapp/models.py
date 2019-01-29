@@ -2,6 +2,12 @@ from flask import current_app
 from flask_login import UserMixin
 from traxiapp import db, login_manager
 
+class Availability(db.Model):
+    id = db.Column(db.Integer(), primary_key = True)
+    driver_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    unavailable_from = db.Column(db.DateTime)
+    unavailable_to = db.Column(db.DateTime)
+
 class Review(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -26,6 +32,10 @@ class User(db.Model, UserMixin):
     #Review relationship
     reviewer = db.relationship('Review', foreign_keys=[Review.user_id],backref=db.backref('reviewer', lazy='joined'))
     reviewed = db.relationship('Review', foreign_keys=[Review.driver_id], backref=db.backref('reviewed', lazy='joined'))
+
+    # Availability relationship
+    availabilities = db.relationship('Availability', foreign_keys=[Availability.driver_id], backref=db.backref('driver', lazy=True))
+
 
     def has_roles(self):
         return self.roles

@@ -2,7 +2,7 @@ from flask import Blueprint, url_for, redirect, render_template, current_app, fl
 from flask_login import current_user, login_user, logout_user, login_required
 from traxiapp import db, bcrypt
 from traxiapp.users.forms import LoginForm, RegisterForm, UpdateAccountForm
-from traxiapp.models import User, Role
+from traxiapp.models import User, Role, Availability
 
 
 users = Blueprint('users', __name__)
