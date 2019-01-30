@@ -1,64 +1,79 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="content-section">
-      <div class="media">
-        <div class="media-body">
-          <h2 class="account-heading">{{ current_user.username }}</h2>
-          <p class="text-secondary">{{ current_user.email }}</p>
+<div class="tile is-ancestor">
+    <div class='tile is-2 is-vertical is-parent'>
+        <div class='tile is-child'>
+            <aside class="menu">
+                <p class='menu-label'>
+                    Administration
+                </p>
+                <ul class='menu-list'>
+                    <li><a>Profile Information</a></li>
+                    <li><a>Availability</a></li>
+                    <li><a>Bookings</a></li>
+                </ul>
+                <p class='menu-label'>
+                    Transactions
+                </p>
+                <ul class='menu-list'>
+                    <li><a>Payments</a></li>
+                </ul>
+            </aside>
         </div>
-      </div>
-        <form method="POST" action="" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Update Account Info</legend>
-                <div class="form-group">
-                    {{ form.username.label(class="form-control-label") }}
-
-                    {% if form.username.errors %}
-                        {{ form.username(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.username.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.username(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
-                    {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.email.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.email(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                {% if current_user.has_role('driver') %}  
-                <div class="form-group">
-                        {{ form.country.label(class="form-control-label") }}
-                        {{ form.country(class="form-control form-control-lg") }}
+    </div>
+    <div class='tile is-9 is-parent'>
+        <div class='is-tile is-child'>
+            <h1>Update Profile Information</h1>
+            <br>
+            <form method="POST" action=''>
+                {{ form.hidden_tag() }}
+                <div class='field'>
+                    <label class='label'>Username</label>
+                    <div class='control' style='width: 300px'>
+                        {{ form.username(class='input') }}
+                        {% for error in form.username.errors %}
+                        <p class='has-text-danger'>{{ error }}</p>
+                        {% endfor %}
                     </div>
-                    <div class="form-group">
-                            {{ form.city.label(class="form-control-label") }}
-                            {{ form.city(class="form-control form-control-lg") }}
-                        </div>
-                        <div class="form-group">
-                                {{ form.about.label(class="form-control-label") }}
-                                {{ form.about(class="form-control form-control-lg") }}
-                            </div>
-                {% endif %}
-            </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
-            </div>
+                </div>
+                <div class='field'>
+                    <label class='label'>Email</label>
+                    <div class='control' style='width: 300px'>
+                        {{ form.email(class='input') }}
+                        {% for error in form.email.errors %}
+                        <p class='has-text-danger'>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class='field'>
+                    <label class='label'>Country</label>
+                    <div class='control' style='width: 300px'>
+                        {{ form.country(class='input') }}
+                    </div>
+                </div>
+                <div class='field'>
+                    <label class='label'>City</label>
+                    <div class='control' style='width: 300px'>
+                        {{ form.city(class='input') }}
+                    </div>
+                </div>
+                <div class='field'>
+                    <label class='label'>About</label>
+                    <div class='control' style='width: 300px'>
+                        {{ form.about(class='input') }}
+                    </div>
+                </div>
+
+                {{ form.submit(class='button is-warning') }}
+
+        </div>
         </form>
-    </div> 
+    </div>
+</div>
+</div>
+
+
+
 
 {% endblock content %}
-
