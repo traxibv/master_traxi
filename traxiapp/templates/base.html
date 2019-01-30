@@ -8,11 +8,11 @@
     <!-- , shrink-to-fit=no -->
 
     <!-- Bulma_CSS -->
-    <link rel= "stylesheet" type= "text/css" href= "/static/css/bulma.css">
-    
+    <link rel="stylesheet" type="text/css" href="/static/css/bulma.css">
+
     <!--JQuery-->
     <script src="/static/js/jquery-3.3.1.min.js"></script>
-    
+
     {% if title %}
     <title>Traxi - {{ title }}</title>
     {% else %}
@@ -22,72 +22,82 @@
 
 <body>
 
-        <nav class="navbar is-fixed-top">
-            <div class="container">
-                <div class="navbar-brand">
-                    <a class="navbar-item" href="/"><strong>Traxi</strong></a>
-                    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
+    <nav class="navbar is-fixed-top">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/"><strong>Traxi</strong></a>
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarBasic" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href='/home'>Home</a>
+                    <a class="navbar-item" href='/about'>About Urs</a>
                 </div>
-                <div id="navbarBasic" class="navbar-menu">
-                    <div class="navbar-start">
-                        <a class="navbar-item" href='/home'>Home</a>
-                        <a class="navbar-item" href='/about'>About Urs</a>
-                    </div>
-                    <div class="navbar-end">
-                        {% if current_user.is_authenticated %}
-                        <a class="navbar-item" href='/account'>Account</a>
-                        <a class="navbar-item" href='/logout'>Logout</a>
+                <div class="navbar-end">
+                    {% if current_user.is_authenticated %}
+                    <a class="navbar-item" href='/account'>Account</a>
+                    <a class="navbar-item" href='/logout'>Logout</a>
 
-                        {% else %}
-                        <a class="navbar-item" href='/login'>Login</a>
-                        <a class="navbar-item" href='/register'>Register</a>
-                        {% endif %}
-                    </div>
+                    {% else %}
+                    <a class="navbar-item" href='/login'>Login</a>
+                    <a class="navbar-item" href='/register'>Register</a>
+                    {% endif %}
                 </div>
             </div>
-        </nav>
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
+        </div>
+    </nav>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
 
-                // Get all "navbar-burger" elements
-                const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+            // Get all "navbar-burger" elements
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-                // Check if there are any navbar burgers
-                if ($navbarBurgers.length > 0) {
+            // Check if there are any navbar burgers
+            if ($navbarBurgers.length > 0) {
 
-                    // Add a click event on each of them
-                    $navbarBurgers.forEach( el => {
-                        el.addEventListener('click', () => {
+                // Add a click event on each of them
+                $navbarBurgers.forEach(el => {
+                    el.addEventListener('click', () => {
 
-                            // Get the target from the "data-target" attribute
-                            const target = el.dataset.target;
-                            const $target = document.getElementById(target);
+                        // Get the target from the "data-target" attribute
+                        const target = el.dataset.target;
+                        const $target = document.getElementById(target);
 
-                            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                            el.classList.toggle('is-active');
-                            $target.classList.toggle('is-active');
+                        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                        el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
 
-                        });
                     });
-                }
+                });
+            }
 
-            });
-        </script>
+        });
+    </script>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class='container'>
+            {% for message in messages %}
+            <li style="font-size:150%; color:blue;">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
 
     <div class="container">
         {% block content %}{% endblock content %}
     </div>
 
     <footer class="footer">
-      <div class="content has-text-centered">
-        <p>
-            Niet zo <a href="/static/images/ikea_dontbeaglum.png">janken</a>. <strong>Kut.</strong>
-        </p>
-      </div>
+        <div class="content has-text-centered">
+            <p>
+                Niet zo <a href="/static/images/ikea_dontbeaglum.png">janken</a>. <strong>Kut.</strong>
+            </p>
+        </div>
     </footer>
 </body>
 

@@ -33,7 +33,7 @@ def create_app(config_class=DevelopmentConfig):
     app.register_blueprint(drivers)
     app.register_blueprint(main)
 
-    from traxiapp.models import Role, User
+    from traxiapp.models import Role, User, Availability
     @app.before_first_request
     def before_first_request():
         with app.app_context():

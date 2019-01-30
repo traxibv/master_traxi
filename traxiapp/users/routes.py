@@ -2,7 +2,7 @@ from flask import Blueprint, url_for, redirect, render_template, current_app, fl
 from flask_login import current_user, login_user, logout_user, login_required
 from traxiapp import db, bcrypt
 from traxiapp.users.forms import LoginForm, RegisterForm, UpdateAccountForm
-from traxiapp.models import User, Role
+from traxiapp.models import User, Role, Availability
 
 
 users = Blueprint('users', __name__)
@@ -60,19 +60,21 @@ def logout():
 @users.route('/account', methods=['GET', 'POST'])
 @login_required
 def account(): 
-    form = UpdateAccountForm()
-    if form.validate_on_submit():
+    form = UpdateAccountForm(current_user.username)
+    if request.method== 'POST' and form.validate():
         current_user.username = form.username.data
         current_user.email = form.email.data
         current_user.country = form.country.data
         current_user.city = form.city.data
         current_user.about = form.about.data
         db.session.commit()
-        flash('your account has been updated', 'success')
+        flash('Your account has been updated', 'success')
         if current_user.has_role('driver'):
             return redirect(url_for('drivers.user', username=current_user.username))
         else:
             return redirect(url_for('main.home'))
+    elif request.method== 'POST' and not form.validate():
+        return render_template('account.html', title='Account', form=form)
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
@@ -80,3 +82,4 @@ def account():
         form.city.data = current_user.city
         form.about.data = current_user.about
         return render_template('account.html', title='Account', form=form)
+    
