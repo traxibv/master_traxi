@@ -57,9 +57,9 @@ def logout():
     return redirect(url_for('main.home'))
 
 # url route for the account page
-@users.route('/account', methods=['GET', 'POST'])
+@users.route('/<username>/account', methods=['GET', 'POST'])
 @login_required
-def account(): 
+def account(username): 
     form = UpdateAccountForm()
     if request.method== 'POST' and form.validate():
         current_user.username = form.username.data
@@ -70,7 +70,7 @@ def account():
         db.session.commit()
         flash('Your account has been updated', 'success')
         if current_user.has_role('driver'):
-            return redirect(url_for('drivers.user', username=current_user.username))
+            return redirect(url_for('drivers.profile', username=current_user.username))
         else:
             return redirect(url_for('main.home'))
     elif request.method== 'POST' and not form.validate():
