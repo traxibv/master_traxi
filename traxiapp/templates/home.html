@@ -20,6 +20,11 @@
                     {% endfor %}
                 </select>
             </div>
+            <br>
+            <br>
+            <input class='input is-primary is-fullwidth' placeholder="Start trip" id='startdate'>
+            <br>
+            <input class='input is-primary is-fullwidth' placeholder="End trip" id='enddate'>
         </div>
     </div>
 
@@ -31,6 +36,9 @@
         {% endfor %}
     </div>
 </div>
-
+<script>
+    $('#startdate').datepicker(); 
+    $('#enddate').datepicker(); 
+</script>
 
 {% endblock content %}
