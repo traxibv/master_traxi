@@ -1,11 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="section">
-    <div style="padding-left:20px">
-        <h1>Fuhr mich.</h1>
+<section class="hero is-primary is-medium has-bg-img">
+  <div class="hero-body">
+    <div class="container has-text-right">
+      <h1 class="title has-indent-1">
+        .Fuhr mich
+      </h1>
+      <h2 class="subtitle has-indent-2">
+        Find your personal driver
+      </h2>
+    </div>
+  </div>
+</section>
+<br>
+<section class="tile is-ancestor is-flex is-hidden-mobile">
+    <div class="tile is-parent is-vertical">
+        <div class="tile is-child box">
+            <p class="has-text-weight-bold">Reliable <i class="icon-055"></i></p>
+            <p>All our drivers are certified (have driver license) and are very experienced.</p>
+        </div>
+    </div>
+    <div class="tile is-parent is-vertical">
+        <div class="tile is-child box">
+            <p class="has-text-weight-bold">Easy <i class="icon-268"></i></p>
+            <p>Just search, contact and book. Easier than your mom on a friday night.</p>
+        </div>
+    </div>
+    <div class="tile is-parent is-vertical">
+        <div class="tile is-child box">
+            <p class="has-text-weight-bold">Fair <i class="icon-008"></i></p>
+            <p>Max-Havelaar drivers are the new chocolate.</p>
+        </div>
     </div>
 </section>
+
+<div class="is-small-pad is-hidden-tablet">
+    <p class="has-text-weight-bold is-size-7">Reliable, Easy, Fair<p>
+    <p class="is-size-7">All our drivers are certified (have driver license) and are very experienced. Just search, contact and book. Easier than your mom on a friday night. Max-Havelaar drivers are the new chocolate.<p>
+</div>
 
 <div class="tile is-ancestor">
     <div class="tile is-3 is-vertical is-parent">

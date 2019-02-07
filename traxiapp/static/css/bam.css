@@ -1,0 +1,36 @@
+.hero.has-bg-img {
+    background: url('/static/images/usafrica.png')left top;
+    background-size:cover;
+}
+
+.has-indent-left {
+    text-indent: 1.5em;
+}
+
+.has-indent-1 {
+    direction: rtl;
+    text-indent: 1em;
+}
+
+.has-indent-2 {
+    direction: rtl;
+    text-indent: 1.7em;
+}
+
+@media screen and (max-width: 1087px) {
+    .is-size-8-touch {
+        font-size: 0.50rem !important;
+    }
+}
+
+.is-small-pad {
+    padding: 0.1em 1.5rem 1rem;
+  }
+
+
+/*@media screen and (max-width: 887px) {*/
+    /*.hero.has-bg-img {*/
+        /*background: url('/static/images/') center center;*/
+        /*background-size: cover;*/
+    /*}*/
+/*}*/
