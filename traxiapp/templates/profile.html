@@ -1,64 +1,52 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="section">
-        <div class="container">
-          <h1 class="title">Hi, I am {{user.username}}.</h1>
-          <h2 class="subtitle">
-            Welcome to my profile!
-          </h2>
+<div class='hero'>
+  <div class='hero-body'>
+    <div class='container'>
+      <h1 class="title has-text-centered">Hi, I am {{user.username}}.</h1>
+      <h2 class="subtitle has-text-centered">Welcome to my profile!</h2>
+    </div>
+  </div>
+</div>
+<section class="tile is-ancestor is-flex">
+  <div class="tile is-parent is-vertical">
+    <div class='tile is-child'>
+        <h2 class="subtitle has-text-centered has-text-weight-bold">About me</h2>
+        <p class='has-text-centered'>{{ user.about }}</p>
+    </div>
+    <div class='is-child'>
+      <h2 class='subtitle has-text-centered has-text-weight-bold'>General Info</h2>
+        <p class='has-text-centered'>Country: {{ user.country }}</p>
+        <p class='has-text-centered'>City: {{ user.city }}</p>
+        <br>
+    </div>
+    <div class='tile is-child'>
+        <div class="tabs is-centered">
+          <ul>
+            <li><a>Pictures</a></li>
+            <li><a>Reviews</a></li>
+            <li><a>Contact</a></li>
+          </ul>
         </div>
-      </section>
-      <section class="section">
-            <div class="box">
-          <h2 class="subtitle">Something little about me !!</h2>
-          <p>{{ user.about }}</p>
-          </div>
-      </section>
-
-      <section class="section">
-          <div class="box">
-          <h2 class="subtitle">General info:</h2>
-          <table class="table">
-              <tbody>
-                  <tr>
-                  <th>Username:</th>
-                  <td>{{ user.username }}</td>
-                  </tr>
-                  <tr>
-                  <th>Email:</th>
-                  <td>{{ user.email }}</td>
-                  </tr>
-                  <th>Country:</th>
-                  <td>{{ user.country }}</td>
-                  <tr>
-                  <th>City:</th>
-                  <td>{{ user.city }}</td>
-                  </tr>
-              </tbody>
-          </table>
+    </div>
+    <div class='tile is-child'>
+      <h2 class="subtitle has-text-centered has-text-weight-bold">Reviews</h2>
+      {% for review in reviews %}
+        <div class="box">
+          {% include '_review.html' %}
         </div>
-      </section>
-
-      <section class="section">
-          <div class="box">
-            <h2 class="subtitle">Reviews</h2>
-            {% for review in reviews %}
-            <div class="container is-fluid">
-                    <div class="box">
-                        {% include '_review.html' %}
-                    </div>
-            </div>
-            {% endfor %}
-            
+      {% endfor %}
 
 
-            {% if current_user.is_authenticated %}  
-            {% if current_user.has_role('end-user') %}
+
+      {% if current_user.is_authenticated %}
+      {% if current_user.has_role('end-user') %}
       <a class="button is-dark" href="{{ url_for('drivers.create_review', username=user.username) }}">Create Review</a>
       {% endif %}
       {% endif %}
     </div>
+  </div>
 </section>
 
 {% endblock %}

@@ -37,7 +37,7 @@
     </div>
     <div class='card-footer'>
         <div class='card-footer-item'>
-            <a href="#" class="button is-warning" id="link-{{  driver.username  }}">
+            <a href="{{ url_for('drivers.user', username=driver.username) }}" class="button is-warning" id="link-{{  driver.username  }}">
                 See driver profile</a>
         </div>
     </div>
