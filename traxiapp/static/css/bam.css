@@ -1,3 +1,4 @@
+/* home.html*/
 .hero.has-bg-img {
     background: url('/static/images/usafrica.png')left top;
     background-size:cover;
@@ -27,10 +28,28 @@
     padding: 0.1em 1.5rem 1rem;
   }
 
+.p-icon {
+    position: relative;
+}
 
-/*@media screen and (max-width: 887px) {*/
-    /*.hero.has-bg-img {*/
-        /*background: url('/static/images/') center center;*/
-        /*background-size: cover;*/
-    /*}*/
-/*}*/
+.icon-bg {
+    font-size: 60px;
+    color: hsl(0, 0%, 90%);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.icon-bgs {
+    font-size: 40px;
+    color: hsl(0, 0%, 90%);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    white-space: pre;
+}
+/* */
