@@ -1,6 +1,7 @@
 from flask import current_app
 from flask_login import UserMixin
 from traxiapp import db, login_manager
+from datetime import datetime
 
 class Availability(db.Model):
     id = db.Column(db.Integer(), primary_key = True)
@@ -10,6 +11,7 @@ class Availability(db.Model):
 
 class Review(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
+    created = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     driver_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     rating = db.Column(db.Integer)

@@ -1,17 +1,12 @@
-<div class="box">
-<table class="table">
-        <tbody>
-            <tr>
-            <th>Reeted by:</th>
-            <td>{{ review.user_id }}</td>
-            </tr>
-            <tr>
-            <th>Reeting:</th>
-            <td>{{ review.rating }}</td>
-            </tr>
-            <tr>
-            <th>Just my opinion:</th>
-            <td>{{ review.review_text }}</td>
-        </tbody>
-    </table>
+<div class="card">
+    <header class='card-header'>
+        <p class='card-header-title'>[[ Star Rating ]]</p>
+    </header>
+    <div class='card-content'>
+        <div class='content'>
+            <p>Reviewed by: {{ review.user_id }}</p>
+            <p>Description: {{ review.review_text }}</p>
+            <time datetime='2017-02-11'>Review date: {{ review.created }}</date>
+        </div>
+    </div>
 </div>

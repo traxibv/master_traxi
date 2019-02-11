@@ -22,7 +22,7 @@ def create_review(username):
         current_user.create_review(driver, form.rating.data, form.review_text.data)
         db.session.commit()
         reviews=Review.query.filter_by(driver_id=driver.id).all()
-        return render_template('user.html',user=driver, reviews=reviews)
+        return redirect(url_for('drivers.user', username=driver.username, reviews=reviews))
     return render_template('create_review.html', user=driver, form=form, title=driver.username)
     
     
