@@ -70,7 +70,7 @@ def account(username):
         db.session.commit()
         flash('Your account has been updated', 'success')
         if current_user.has_role('driver'):
-            return redirect(url_for('drivers.profile', username=current_user.username))
+            return redirect(url_for('drivers.user', username=current_user.username))
         else:
             return redirect(url_for('main.home'))
     elif request.method== 'POST' and not form.validate():
