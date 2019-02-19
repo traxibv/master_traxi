@@ -1,4 +1,6 @@
+//Compile css command:
 //sass --no-source-map traxi.scss:../traxi.css
+
 @charset "utf-8";
 
 // Import a Google Font
@@ -16,6 +18,7 @@ $ceo-green: #367C2B;
 $family-sans-serif: "Nunito", sans-serif;
 $grey-light: $beige-light;
 $grey-lighter: $beige-lighter;
+$yellow: sandybrown;
 
 $primary: $beige-lighter;
 $dark: $beige-light;
