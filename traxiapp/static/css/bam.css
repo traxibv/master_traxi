@@ -1,6 +1,6 @@
 /* home.html*/
 .hero.has-bg-img {
-    background: url('/static/images/usafrica.png')left top;
+    background: url('/static/images/home_hero.png')left top;
     background-size:cover;
 }
 
