@@ -11,7 +11,7 @@ migrate = Migrate()
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
-profile_pic = UploadSet('profile_pic', IMAGES)
+profilepictures = UploadSet('profilepictures', IMAGES)
 
 
 def create_app(config_class=DevelopmentConfig):
@@ -25,7 +25,7 @@ def create_app(config_class=DevelopmentConfig):
     login_manager.init_app(app)
 
     # Cofigure the profile pic uploading via Flask-Uploads
-    configure_uploads(app, profile_pic)
+    configure_uploads(app, profilepictures)
 
     login_manager.login_view = 'users.login'
     login_manager.login_message_category = 'info'

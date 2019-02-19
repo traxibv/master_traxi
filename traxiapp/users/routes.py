@@ -3,7 +3,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from traxiapp import db, bcrypt
 from traxiapp.users.forms import LoginForm, RegisterForm, UpdateAccountForm
 from traxiapp.models import User, Role, Availability
-from traxiapp import profile_pic
+from traxiapp import profilepictures
 
 
 users = Blueprint('users', __name__)
@@ -70,10 +70,10 @@ def account(username):
         current_user.about = form.about.data
         # if a profile picture is uploaded, save the file itself as well as its filename and url
         if 'profile_pic' in request.files:
-            filename = profile_pic.save(request.files['profile_pic'])
-            url = profile_pic.url(filename)
+            filename = profilepictures.save(request.files['profile_pic'])
+            url = profilepictures.url(filename)
             current_user.profile_pic_filename = filename
-            profile_pic_url = url
+            current_user.profile_pic_url = url
         db.session.commit()
         flash('Your account has been updated', 'success')
         if current_user.has_role('driver'):
