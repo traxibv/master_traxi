@@ -46,9 +46,9 @@
 </div>
 
 <div class="tile is-ancestor">
-    <div class="tile is-3 is-vertical is-parent">
-        <div class="tile is-child box">
-            <h1 class='tile'>Select driver</h1>
+    <div class="tile is-parent is-3 is-vertical">
+        <div class="tile is-child box has-background-primary">
+            <h1">Select driver</h1>
             <br>
             <div class="select is-primary is-fullwidth">
                 <select>
@@ -66,7 +66,7 @@
         </div>
     </div>
 
-    <div class="tile is-vertical is-parent">
+    <div class="tile is-parent is-vertical">
         {% for driver in drivers %}
         <div class="tile is-child">
             {% include '_driver.html' %}
@@ -74,6 +74,8 @@
         {% endfor %}
     </div>
 </div>
+
+
 <script>
     $('#startdate').datepicker(); 
     $('#enddate').datepicker(); 

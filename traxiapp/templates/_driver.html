@@ -1,7 +1,8 @@
-<div class='card'>
+<div class="card">
     <div class="card-header">
         <div class="card-header-title">
-            {{ driver.username }}
+            <a href="{{ url_for('drivers.user', username=driver.username) }}" id="link-{{  driver.username  }}">
+                {{ driver.username }}</a>
         </div>
     </div>
     <div class="card-content">
@@ -34,12 +35,6 @@
 
             </tbody>
         </table>
-    </div>
-    <div class='card-footer'>
-        <div class='card-footer-item'>
-            <a href="{{ url_for('drivers.user', username=driver.username) }}" class="button is-warning" id="link-{{  driver.username  }}">
-                See driver profile</a>
-        </div>
     </div>
 </div>
 
