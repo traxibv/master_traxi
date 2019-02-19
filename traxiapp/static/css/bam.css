@@ -1,6 +1,6 @@
 /* home.html*/
 .hero.has-bg-img {
-    background: url('/static/images/usafrica.png')left top;
+    background: url('/static/images/home_hero.png')left top;
     background-size:cover;
 }
 
@@ -34,7 +34,7 @@
 
 .icon-bg {
     font-size: 60px;
-    color: hsl(0, 0%, 90%);
+    color: sandybrown;
     position: absolute;
     top: 0;
     right: 0;
@@ -44,7 +44,7 @@
 
 .icon-bgs {
     font-size: 40px;
-    color: hsl(0, 0%, 90%);
+    color: whitesmoke;
     position: absolute;
     top: 0;
     right: 0;
