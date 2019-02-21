@@ -1,3 +1,5 @@
+@import "colors.sass";
+
 /* home.html*/
 .hero.has-bg-img {
     background: url('/static/images/home_hero.png')left top;
@@ -10,7 +12,7 @@
 
 .has-indent-1 {
     direction: rtl;
-    text-indent: 1em;
+    text-indent: 0.7em;
 }
 
 .has-indent-2 {
@@ -34,7 +36,7 @@
 
 .icon-bg {
     font-size: 60px;
-    color: sandybrown;
+    color: $oranje;
     position: absolute;
     top: 0;
     right: 0;
@@ -44,7 +46,7 @@
 
 .icon-bgs {
     font-size: 40px;
-    color: whitesmoke;
+    color: lighten($oranje, 10%);
     position: absolute;
     top: 0;
     right: 0;
