@@ -9,43 +9,52 @@
     </div>
   </div>
 </div>
+
+<div class='is-flex i'>
+  <figure class="image is-128x128">
+    <img src="https://versions.bulma.io/0.7.0/images/placeholders/128x128.png">
+  </figure>
+</div>
+
 <section class="tile is-ancestor is-flex">
   <div class="tile is-parent is-vertical">
+
     <div class='tile is-child'>
-        <h2 class="subtitle has-text-centered has-text-weight-bold">About me</h2>
-        <p class='has-text-centered'>{{ user.about }}</p>
+      <h2 class="subtitle has-text-centered has-text-weight-bold">About me</h2>
+      <p class='has-text-centered'>{{ user.about }}</p>
     </div>
+
     <div class='is-child'>
       <h2 class='subtitle has-text-centered has-text-weight-bold'>General Info</h2>
-        <p class='has-text-centered'>Country: {{ user.country }}</p>
-        <p class='has-text-centered'>City: {{ user.city }}</p>
-        <br>
+      <p class='has-text-centered'>Country: {{ user.country }}</p>
+      <p class='has-text-centered'>City: {{ user.city }}</p>
+      <br>
     </div>
+
     <div class='tile is-child'>
-        <div class="tabs is-centered">
-          <ul>
-            <li><a>Pictures</a></li>
-            <li><a>Reviews</a></li>
-            <li><a>Contact</a></li>
-          </ul>
-        </div>
+      <div class="tabs is-centered">
+        <ul>
+          <li><a>Pictures</a></li>
+          <li><a>Reviews</a></li>
+          <li><a>Contact</a></li>
+        </ul>
+      </div>
     </div>
+
     <div class='tile is-child'>
       <h2 class="subtitle has-text-centered has-text-weight-bold">Reviews</h2>
       {% for review in reviews %}
-        <div class="box">
-          {% include '_review.html' %}
-        </div>
+      <div class="box">
+        {% include '_review.html' %}
+      </div>
       {% endfor %}
-
-
-
       {% if current_user.is_authenticated %}
       {% if current_user.has_role('end-user') %}
       <a class="button is-dark" href="{{ url_for('drivers.create_review', username=user.username) }}">Create Review</a>
       {% endif %}
       {% endif %}
     </div>
+
   </div>
 </section>
 
