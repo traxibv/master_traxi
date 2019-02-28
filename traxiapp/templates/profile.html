@@ -10,11 +10,11 @@
   </div>
 </div>
 
-<div class='is-flex i'>
-  <figure class="image is-128x128">
-    <img src="https://versions.bulma.io/0.7.0/images/placeholders/128x128.png">
+<section class='section'>
+  <figure class="image is-128x128 container">
+    <img class='avatar' onerror="this.src='/static/images/blank-profile-picture.png';" src="/static/profile_pics/{{ user.profile_pic_filename }}">
   </figure>
-</div>
+</section>
 
 <section class="tile is-ancestor is-flex">
   <div class="tile is-parent is-vertical">
