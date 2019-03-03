@@ -46,11 +46,14 @@
                     </div>
                 </div>
                 <br>
-                
-                <input class='inputfile' type='file' name='profile_pic' id='profile_pic' />
-                <label class='button' for="profile_pic">Choose a file</label>
-                <input class='input' type="text" name = "file" id="filename" readonly>
-                <br>
+                <div class='field'>
+                    <label class='label'>Avatar</label>
+                    <div class='control' style='width: 300px'>
+                        <input class='inputfile' type='file' name='profile_pic' id='profile_pic' />
+                        <label class='button' for="profile_pic">Select picture...</label>
+                        <input class='input' type="text" name="file" id="filename" readonly>
+                    </div>
+                </div>
                 <br>
 
                 {{ form.submit(class='button is-warning') }}
