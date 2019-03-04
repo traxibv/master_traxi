@@ -4,12 +4,14 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from traxiapp.config import DevelopmentConfig
+from flask_uploads import UploadSet, IMAGES, configure_uploads
 
 
 migrate = Migrate()
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
+profilepictures = UploadSet('profilepictures', IMAGES)
 
 
 def create_app(config_class=DevelopmentConfig):
@@ -21,6 +23,9 @@ def create_app(config_class=DevelopmentConfig):
     db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
+
+    # Cofigure the profile pic uploading via Flask-Uploads
+    configure_uploads(app, profilepictures)
 
     login_manager.login_view = 'users.login'
     login_manager.login_message_category = 'info'

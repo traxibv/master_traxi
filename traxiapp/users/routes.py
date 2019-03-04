@@ -1,8 +1,12 @@
+import os
+from pathlib import Path
+import glob
 from flask import Blueprint, url_for, redirect, render_template, current_app, flash, request
 from flask_login import current_user, login_user, logout_user, login_required
 from traxiapp import db, bcrypt
 from traxiapp.users.forms import LoginForm, RegisterForm, UpdateAccountForm
 from traxiapp.models import User, Role, Availability
+from traxiapp import profilepictures
 
 
 users = Blueprint('users', __name__)
@@ -67,6 +71,21 @@ def account(username):
         current_user.country = form.country.data
         current_user.city = form.city.data
         current_user.about = form.about.data
+        # if a profile picture is uploaded
+        if 'profile_pic' in request.files:
+            # chekc if user allready has avatar on the filesystem and if yes, remove it 
+            basedir = Path(__file__).resolve().parents[1]
+            picsdir = 'static/profile_pics'
+            filepath = filepath_form = os.path.join(basedir,picsdir)
+            filepath_user =  glob.glob('{}/{}_*'.format(filepath,current_user.username))
+            filepath_user_string = ''.join(filepath_user)
+            if os.path.exists(filepath_user_string):
+                os.remove(filepath_user_string)
+            # save avatar to filesystem and filename + url to the database
+            filename = profilepictures.save(request.files['profile_pic'], name='{}_{}'.format(current_user.username,request.files['profile_pic'].filename))
+            url = profilepictures.url(filename)
+            current_user.profile_pic_filename = filename
+            current_user.profile_pic_url = url
         db.session.commit()
         flash('Your account has been updated', 'success')
         if current_user.has_role('driver'):

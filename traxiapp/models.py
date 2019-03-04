@@ -38,6 +38,9 @@ class User(db.Model, UserMixin):
     # Availability relationship
     availabilities = db.relationship('Availability', foreign_keys=[Availability.driver_id], backref=db.backref('driver', lazy=True))
 
+    # profile pic
+    profile_pic_filename = db.Column(db.String, default=None, nullable=True)
+    profile_pic_url = db.Column(db.String, default=None, nullable=True)
 
     def has_roles(self):
         return self.roles

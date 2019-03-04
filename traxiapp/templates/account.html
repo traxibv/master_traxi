@@ -2,31 +2,12 @@
 
 {% block content %}
 <div class="tile is-ancestor">
-    <div class='tile is-2 is-vertical is-parent'>
-        <div class='tile is-child'>
-            <aside class="menu">
-                <p class='menu-label'>
-                    Administration
-                </p>
-                <ul class='menu-list'>
-                    <li><a>Update Profile</a></li>
-                    <li><a>Availability</a></li>
-                    <li><a>Bookings</a></li>
-                </ul>
-                <p class='menu-label'>
-                    Transactions
-                </p>
-                <ul class='menu-list'>
-                    <li><a>Payments</a></li>
-                </ul>
-            </aside>
-        </div>
-    </div>
     <div class='tile is-9 is-parent'>
         <div class='is-tile is-child'>
             <h1>Update Profile Information</h1>
             <br>
-            <form method="POST" action=''>
+
+            <form method="POST" action='' enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                 <div class='field'>
                     <label class='label'>Username</label>
@@ -64,6 +45,16 @@
                         {{ form.about(class='input') }}
                     </div>
                 </div>
+                <br>
+                <div class='field'>
+                    <label class='label'>Avatar</label>
+                    <div class='control' style='width: 300px'>
+                        <input class='inputfile' type='file' name='profile_pic' id='profile_pic' />
+                        <label class='button' for="profile_pic">Select picture...</label>
+                        <input class='input' type="text" name="file" id="filename" readonly>
+                    </div>
+                </div>
+                <br>
 
                 {{ form.submit(class='button is-warning') }}
 
@@ -72,8 +63,6 @@
     </div>
 </div>
 </div>
-
-
-
+<script type='text/javascript' src='/static/js/filename.js'></script>
 
 {% endblock content %}

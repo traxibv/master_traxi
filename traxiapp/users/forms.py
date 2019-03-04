@@ -2,8 +2,10 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from traxiapp.models import User, Availability
 from flask_login import current_user
+from traxiapp import profilepictures
 
 
 class LoginForm(FlaskForm):
@@ -39,6 +41,7 @@ class UpdateAccountForm(FlaskForm):
     country = StringField('Country', validators=[Length(max=50)])
     about = TextAreaField('About')
     submit = SubmitField('Update')
+    profile_pic = FileField('Profile picture', validators=[FileAllowed(profilepictures, 'Only images are allowed')])
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
