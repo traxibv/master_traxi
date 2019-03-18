@@ -1,12 +1,10 @@
-<div class="card">
-    <header class='card-header'>
-        <p class='card-header-title'>[[ Star Rating ]]</p>
-    </header>
-    <div class='card-content'>
-        <div class='content'>
-            <p>Reviewed by: {{ review.user_id }}</p>
-            <p>Description: {{ review.review_text }}</p>
-            <time datetime='2017-02-11'>Review date: {{ review.created }}</date>
+<article class="media">
+        <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong>{{ review.user }}</strong> <small>{{ review.created|datetimeformat }}</small><br>
+                        {{ review.review_text }}
+                    </p>
+                </div>
         </div>
-    </div>
-</div>
+</article>

@@ -1,15 +1,16 @@
-.avatar {
-
-    /* make a square container */
-    width: 150px;
-    height: 150px;
-
-    /* fill the container, preserving aspect ratio, and cropping to fit */
-    background-size: cover;
-
-    /* center the image vertically and horizontally */
-    background-position: top center;
-
-    /* round the edges to a circle with border radius 1/2 container size */
+.avatar-cropper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #fff;
     border-radius: 50%;
+    box-shadow: 0 0 5px gray;
+}
+
+.avatar {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
 }

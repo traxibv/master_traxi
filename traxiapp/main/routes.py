@@ -5,6 +5,10 @@ from traxiapp.main.forms import SearchForm
 
 main = Blueprint('main', __name__)
 
+# Template filters
+@main.app_template_filter('datetimeformat')
+def datetimeformat(value, format='%d %B %Y'):
+    return value.strftime(format)
 
 @main.route('/', methods=['GET'])
 @main.route('/home', methods=['GET'])
