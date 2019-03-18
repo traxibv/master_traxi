@@ -12,8 +12,8 @@ class Availability(db.Model):
 class Review(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     created = db.Column(db.DateTime, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    driver_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.Column(db.String, db.ForeignKey('user.username'))
+    driver = db.Column(db.String, db.ForeignKey('user.username'))
     rating = db.Column(db.Integer)
     review_text = db.Column(db.String(300))
 
@@ -32,8 +32,8 @@ class User(db.Model, UserMixin):
     roles = db.relationship('Role', secondary='userroles',backref=db.backref('users', lazy='dynamic'))
 
     #Review relationship
-    reviewer = db.relationship('Review', foreign_keys=[Review.user_id],backref=db.backref('reviewer', lazy='joined'))
-    reviewed = db.relationship('Review', foreign_keys=[Review.driver_id], backref=db.backref('reviewed', lazy='joined'))
+    reviewer = db.relationship('Review', foreign_keys=[Review.user],backref=db.backref('reviewer', lazy='joined'))
+    reviewed = db.relationship('Review', foreign_keys=[Review.driver], backref=db.backref('reviewed', lazy='joined'))
 
     # Availability relationship
     availabilities = db.relationship('Availability', foreign_keys=[Availability.driver_id], backref=db.backref('driver', lazy=True))

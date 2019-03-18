@@ -11,7 +11,7 @@
 </div>
 
 <section class='section'>
-  <figure class="image is-128x128 container">
+  <figure class="avatar-cropper is-128x128 container">
     <img class='avatar' onerror="this.src='/static/images/blank-profile-picture.png';" src="/static/profile_pics/{{ user.profile_pic_filename }}">
   </figure>
 </section>
@@ -19,42 +19,28 @@
 <section class="tile is-ancestor is-flex">
   <div class="tile is-parent is-vertical">
 
-    <div class='tile is-child'>
+    <div class='tile is-child box has-background-light'>
       <h2 class="subtitle has-text-centered has-text-weight-bold">About me</h2>
-      <p class='has-text-centered'>{{ user.about }}</p>
+      <p>{{ user.about }}</p>
     </div>
-
-    <div class='is-child'>
-      <h2 class='subtitle has-text-centered has-text-weight-bold'>General Info</h2>
-      <p class='has-text-centered'>Country: {{ user.country }}</p>
-      <p class='has-text-centered'>City: {{ user.city }}</p>
-      <br>
-    </div>
-
-    <div class='tile is-child'>
-      <div class="tabs is-centered">
-        <ul>
-          <li><a>Pictures</a></li>
-          <li><a>Reviews</a></li>
-          <li><a>Contact</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class='tile is-child'>
-      <h2 class="subtitle has-text-centered has-text-weight-bold">Reviews</h2>
+    
+    <div class='tile is-child box has-background-light'>
+      <h2 class='subtitle has-text-centered has-text-weight-bold'>Reviews</h2>
       {% for review in reviews %}
-      <div class="box">
-        {% include '_review.html' %}
-      </div>
+      {% include '_review.html' %}
       {% endfor %}
-      {% if current_user.is_authenticated %}
-      {% if current_user.has_role('end-user') %}
-      <a class="button is-dark" href="{{ url_for('drivers.create_review', username=user.username) }}">Create Review</a>
-      {% endif %}
-      {% endif %}
+      <br>
+      <div class='container'>
+        {% if current_user.is_authenticated and current_user.has_role('end-user') %}
+        <a class="button" href="{{ url_for('drivers.create_review', username=user.username) }}">Create Review</a>
+        {% endif %}
+      </div>
     </div>
 
+  <div class='tile is-child box has-background-light'>
+      <h2 class='subtitle has-text-centered has-text-weight-bold'>Contact</h2>
+      <a class='button' href='#'>Send a Message</a>
+  </div>
   </div>
 </section>
 

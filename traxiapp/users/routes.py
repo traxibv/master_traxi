@@ -11,6 +11,10 @@ from traxiapp import profilepictures
 
 users = Blueprint('users', __name__)
 
+# Template filters
+@users.app_template_filter('datetimeformat')
+def datetimeformat(value, format='%d %B %Y'):
+    return value.strftime(format)
 
 # url route for the registration page
 @users.route('/register',  methods=['GET', 'POST'])

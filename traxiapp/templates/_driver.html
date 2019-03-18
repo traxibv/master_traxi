@@ -1,49 +1,15 @@
-<div class="card">
-    <div class="card-header">
-        <div class="card-header-title">
-            <a href="{{ url_for('drivers.user', username=driver.username) }}" id="link-{{  driver.username  }}">
-                {{ driver.username }}</a>
+<article class="media box has-background-light">
+    <figure class="media-left">
+        <div class="avatar-cropper">
+            <img class='avatar' onerror="this.src='/static/images/blank-profile-picture.png';" src="/static/profile_pics/{{ driver.profile_pic_filename }}">
+        </div>
+    </figure>
+    <div class="media-content">
+        <div class="content">
+            <a href="{{ url_for('drivers.user', username=driver.username) }}" id="link-{{  driver.username  }}"><strong>
+                    {{ driver.username }}</strong></a>
+            <p><strong>{{ driver.country }}</strong> {{ driver.city }}<br>
+                {{ driver.about }}</p>
         </div>
     </div>
-    <div class="card-content">
-        <table class='table'>
-            <tbody>
-                <tr>
-                    <td>
-                        Country
-                    </td>
-                    <td>
-                        {{ driver.country }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        City
-                    </td>
-                    <td>
-                        {{ driver.city }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        About
-                    </td>
-                    <td>
-                        {{ driver.about }}
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-    </div>
-</div>
-
-
-<script>
-    $(document).ready(function () {
-        $('#link-{{  driver.username  }}').on("click", function () {
-            // coe in here will be executed when user click on of the hide-link elements
-            $('#profile').get('{{ url_for('drivers.user', username=driver.username) }}')
-        });
-    });
-</script>
+</article>
